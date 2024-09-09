@@ -21,6 +21,11 @@ public class PersonModel {
     String city;
     String state;
 
+    /**
+     * Converte o modelo para um entity.
+     *
+     * @return um {@link PersonEntity}.
+     */
     public PersonEntity convertPersonEntity() {
         PersonEntity person = new PersonEntity();
         person.setPhone(getPhone());
