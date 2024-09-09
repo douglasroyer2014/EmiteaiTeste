@@ -10,4 +10,6 @@ import java.util.UUID;
 public interface PersonRepository extends CrudRepository<PersonEntity, UUID> {
 
     PersonEntity findByCpf(String cpf);
+
+    long deleteByCpf(String cpf);
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/person")
+@CrossOrigin(origins = "*")
 public class PersonController {
 
     @Autowired
@@ -32,6 +33,27 @@ public class PersonController {
             return ResponseEntity.ok("Cadastrado com sucesso!");
         }
         return new ResponseEntity("já possui registro cadastrado com esse CPF", HttpStatus.BAD_REQUEST);
+    }
+
+    @PutMapping
+    public ResponseEntity update(@Valid @RequestBody PersonModel personModel) {
+        if (!personService.isValidCPF(personModel.getCpf())) {
+            personService.update(personModel);
+            return ResponseEntity.ok("Alterado com sucesso!");
+        }
+        return new ResponseEntity("Não possui registro cadastrado com esse CPF", HttpStatus.BAD_REQUEST);
+    }
+
+    @DeleteMapping("/{cpf}")
+    public ResponseEntity delete(@PathVariable String cpf) {
+        personService.deleteByCPF(cpf);
+        return ResponseEntity.ok("Registro excluído com sucesso!");
+    }
+
+    @PostMapping("/gerarCSV")
+    public ResponseEntity generateCSV() {
+        personService.generateCSV();
+        return ResponseEntity.ok("Arquivo sendo gerado e será gravado na pasta C:/temp");
     }
 
 }

@@ -24,6 +24,7 @@ public class PersonModel {
     public PersonEntity convertPersonEntity() {
         PersonEntity person = new PersonEntity();
         person.setPhone(getPhone());
+        person.setName(getName());
         person.setCpf(getCpf());
         person.setAddress(getAddress());
         person.setNumber(getNumber());
