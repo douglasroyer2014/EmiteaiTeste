@@ -75,9 +75,9 @@ public class PersonService {
      * Busca todas as pessoas cadastrada e cria um arquivo CSV com essas pessoas.
      */
     @Async
-    public void generateCSV() {
+    public String generateCSV() {
         Iterable<PersonEntity> personList = personRepository.findAll();
-        String nameFile = "C:/temp/Pessoa" + System.currentTimeMillis();
+        String nameFile = "/app/temp/Pessoa" + System.currentTimeMillis();
         try (CSVWriter writer = new CSVWriter(new FileWriter(nameFile), ';',
                 CSVWriter.NO_QUOTE_CHARACTER,
                 CSVWriter.DEFAULT_ESCAPE_CHARACTER,
@@ -93,5 +93,7 @@ public class PersonService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        return nameFile;
     }
 }

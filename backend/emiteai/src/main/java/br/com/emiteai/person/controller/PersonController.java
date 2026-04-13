@@ -52,8 +52,7 @@ public class PersonController {
 
     @PostMapping("/gerarCSV")
     public ResponseEntity generateCSV() {
-        personService.generateCSV();
-        return ResponseEntity.ok("Arquivo sendo gerado e será gravado na pasta C:/temp");
+        return ResponseEntity.ok("Arquivo sendo gerado e será gravado na pasta " + personService.generateCSV());
     }
 
 }
